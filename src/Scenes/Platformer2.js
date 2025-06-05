@@ -1,6 +1,6 @@
-class Platformer extends Phaser.Scene {
+class Platformer2 extends Phaser.Scene {
     constructor() {
-        super("platformerScene");
+        super("platformerScene2");
     }
 
     init() {
@@ -9,12 +9,12 @@ class Platformer extends Phaser.Scene {
         this.PARTICLE_VELOCITY = 50;
         this.SCALE = 2.0;
 
-        this.hasGravityPower = false;
+        this.hasGravityPower = true;
         this.gravityMode = "Up";
     }
 
     create() {
-        this.map = this.add.tilemap("level-one", 16, 16, 60, 30);
+        this.map = this.add.tilemap("level-two", 16, 16, 60, 30);
         this.tileset = this.map.addTilesetImage("monochrome_tilemap_packed", "tilemap");
 
         this.groundLayer = this.map.createLayer("Grounds-n-Platform", this.tileset, 0, 0);
@@ -37,30 +37,7 @@ class Platformer extends Phaser.Scene {
             collides: true
         });
 
-        my.sprite.player = this.physics.add.sprite(125, 14 * 18 * 2, "tilemap_sheet", 0).setScale(2.0);
-
-        this.gravityItem = this.map.createFromObjects("Object", {
-            name: "gravity",
-            key: "tilemap_sheet",
-            frame: 102
-        });
-
-        this.gravityItem.forEach(obj => {
-            obj.setScale(2.0);
-            obj.setOrigin(0.5, 0.5);
-            obj.x *= 2;
-            obj.y *= 2;
-        });
-
-        this.gravityItemGroup = this.physics.add.staticGroup();
-        this.gravityItem.forEach(obj => {
-            this.gravityItemGroup.add(obj);
-        });
-
-        this.physics.add.overlap(my.sprite.player, this.gravityItemGroup, (player, gravityObj) => {
-            this.hasGravityPower = true;
-            gravityObj.destroy();
-        }, null, this);
+        my.sprite.player = this.physics.add.sprite(125, 500, "tilemap_sheet", 0).setScale(2.0);
 
         this.checkpointItem = this.map.createFromObjects("Object", {
             name: "checkpoint",
@@ -81,7 +58,7 @@ class Platformer extends Phaser.Scene {
         });
 
         this.physics.add.overlap(my.sprite.player, this.checkpointItemGroup, () => {
-            this.scene.start("platformerScene2");
+            //this.scene.start("finishScene");
         }, null, this);
 
         my.sprite.player.setCollideWorldBounds(true);
@@ -96,15 +73,6 @@ class Platformer extends Phaser.Scene {
         );
 
         this.cameras.main.startFollow(my.sprite.player);
-
-        this.levelCompleteText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'LEVEL COMPLETE!', {
-            fontSize: '48px',
-            fill: '#ffffff',
-            backgroundColor: '#000000',
-            padding: { x: 20, y: 10 },
-            align: 'center'
-        }).setOrigin(0.5).setScrollFactor(0).setVisible(false);
-
 
         cursors = this.input.keyboard.createCursorKeys();
 

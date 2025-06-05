@@ -8,6 +8,7 @@ class Load extends Phaser.Scene {
 
         this.load.image("tilemap", "monochrome_tilemap_packed.png");
         this.load.tilemapTiledJSON("level-one", "level-one.tmj");
+        this.load.tilemapTiledJSON("level-two", "level-two.tmj");
 
         this.load.spritesheet("tilemap_sheet", "monochrome_tilemap_transparent_packed.png", {
             frameWidth: 16,
@@ -41,7 +42,7 @@ class Load extends Phaser.Scene {
             frameRate: 1
         });
 
-         this.scene.start("platformerScene");
+        this.scene.start("platformerScene");
     }
 
     update() {
