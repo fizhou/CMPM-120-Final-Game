@@ -6,11 +6,13 @@
     "activeFile": "",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
             "scaleInDock": 1
         },
         "#monochrome_tilemap": {
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "#monochrome_tilemap_packed": {
@@ -21,9 +23,9 @@
                 6
             ],
             "scale": 1.5,
-            "selectedLayer": 2,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 388,
+                "x": 484.6666666666667,
                 "y": 279.33333333333337
             }
         },
@@ -43,16 +45,36 @@
         },
         "level-two.tmj#monochrome_tilemap_packed": {
             "scaleInDock": 1
+        },
+        "lobby.tmj": {
+            "expandedObjectLayers": [
+                6
+            ],
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 480,
+                "y": 239.99999999999997
+            }
+        },
+        "lobby.tmj#monochrome_tilemap_packed": {
+            "scaleInDock": 1
         }
     },
     "last.imagePath": "C:/Users/Fiona/CMPM120/CMPM-120-Final-Game/assets",
+    "map.height": 30,
     "map.lastUsedFormat": "json",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 60,
     "openFiles": [
     ],
     "project": "FINAL.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "lobby.tmj"
     ],
+    "resizeMap.removeObjects": true,
     "tileset.embedInMap": true,
     "tileset.tileSize": {
         "height": 16,

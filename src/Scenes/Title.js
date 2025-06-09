@@ -1,27 +1,36 @@
-class Platformer2 extends Phaser.Scene {
+class Title extends Phaser.Scene {
     constructor() {
-        super("platformerScene2");
+        super("titleScreen");
     }
 
     init() {
         this.ACCELERATION = 200;
-        this.DRAG = 150;
+        this.DRAG = 300;
         this.PARTICLE_VELOCITY = 50;
         this.SCALE = 2.0;
 
-        this.hasGravityPower = true;
+        this.hasGravityPower = false;
         this.gravityMode = "Up";
     }
 
     create() {
-        this.map = this.add.tilemap("level-two", 16, 16, 60, 30);
+        this.map = this.add.tilemap("lobby", 16, 16, 60, 30);
         this.tileset = this.map.addTilesetImage("monochrome_tilemap_packed", "tilemap");
 
-        this.groundLayer = this.map.createLayer("Grounds-n-Platform", this.tileset, 0, 0);
+        this.groundLayer = this.map.createLayer("Lobby", this.tileset, 0, 0);
         this.groundLayer.setScale(2.0);
+        
+        this.detailLayer = this.map.createLayer("Lobbydeco", this.tileset, 0, 0);
+        this.detailLayer.setScale(2.0);
 
-        this.decorLayer = this.map.createLayer("Decoration", this.tileset, 0, this.groundLayer.y);
-        this.decorLayer.setScale(2.0);
+        const centerX = this.cameras.main.centerX;
+
+        my.text.title = this.add.bitmapText(centerX, 100, "rocketSquare", "Gravitator").setOrigin(0.5).setScale(1.2);
+        my.text.desc1 = this.add.bitmapText(centerX, 135, "rocketSquare", "E to activate artifact").setOrigin(0.5).setScale(0.8);
+        my.text.desc2 = this.add.bitmapText(centerX, 160, "rocketSquare", "Q to deactivate artifact").setOrigin(0.5).setScale(0.8);
+        my.text.desc3 = this.add.bitmapText(centerX, 185, "rocketSquare", "Press P to play").setOrigin(0.5).setScale(0.7);
+
+
 
         this.physics.world.setBounds(
             0,
@@ -30,35 +39,47 @@ class Platformer2 extends Phaser.Scene {
             this.map.heightInPixels * this.groundLayer.scaleY
         );
 
-        this.physics.world.gravity.y = 1200;
-        this.JUMP_VELOCITY = -650; 
+        this.physics.world.gravity.y = 500;
+        this.JUMP_VELOCITY = -250; 
 
         this.groundLayer.setCollisionByProperty({
             collides: true
         });
 
-        my.sprite.player = this.physics.add.sprite(125, 500, "tilemap_sheet", 0).setScale(2.0);
-
-        this.checkpointItem = this.map.createFromObjects("Object", {
-            name: "checkpoint",
+        my.sprite.player = this.physics.add.sprite(50 * 2, 14 * 18 * 2, "tilemap_sheet", 0).setScale(2.0);
+        
+        this.gravityItem = this.map.createFromObjects("Object", {
+            name: "gravity",
             key: "tilemap_sheet",
-            frame: 59
+            frame: 102
         });
 
-        this.checkpointItem.forEach(obj => {
-            obj.setScale(2.0);
+        this.gravityItem.forEach(obj => {
+            obj.setScale(1.0);
             obj.setOrigin(0.5, 0.5);
-            obj.x *= 2;
-            obj.y *= 2;
+            obj.x *= 1;
+            obj.y *= 1;
         });
 
-        this.checkpointItemGroup = this.physics.add.staticGroup();
-        this.checkpointItem.forEach(obj => {
-            this.checkpointItemGroup.add(obj);
+        this.gravityItemGroup = this.physics.add.staticGroup();
+        this.gravityItem.forEach(obj => {
+            this.gravityItemGroup.add(obj);
         });
 
-        this.physics.add.overlap(my.sprite.player, this.checkpointItemGroup, () => {
-            //this.scene.start("finishScene");
+
+        this.physics.add.overlap(my.sprite.player, this.gravityItemGroup, (player, gravityObj) => {
+            this.hasGravityPower = true;
+            this.sound.play("blip", {
+                volume: 1 
+            });
+            this.add.particles(0, 0, 'kenny-particles', {
+                frame: 'star_06.png',
+                x: gravityObj.x,
+                y: gravityObj.y,
+                duration: 20,
+                scale: { start: 0.1, end: 0 }
+            });
+            gravityObj.destroy();
         }, null, this);
 
         my.sprite.player.setCollideWorldBounds(true);
@@ -74,16 +95,25 @@ class Platformer2 extends Phaser.Scene {
 
         this.cameras.main.startFollow(my.sprite.player);
 
+        this.levelCompleteText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'LEVEL COMPLETE!', {
+            fontSize: '48px',
+            fill: '#ffffff',
+            backgroundColor: '#000000',
+            padding: { x: 20, y: 10 },
+            align: 'center'
+        }).setOrigin(0.5).setScrollFactor(0).setVisible(false);
+
+
         cursors = this.input.keyboard.createCursorKeys();
 
-        this.rKey = this.input.keyboard.addKey('R'); // reset
+        this.PKey = this.input.keyboard.addKey('P'); // play
         this.QKey = this.input.keyboard.addKey('Q'); // down
         this.EKey = this.input.keyboard.addKey('E'); // up
 
         my.vfx = {};
         my.vfx.walking = this.add.particles(0, 0, "kenny-particles", {
             frame: ['smoke_04.png', 'smoke_05.png'],
-            scale: { start: 0.03, end: 0.1 },
+            scale: { start: 0.02, end: 0.05 },
             lifespan: 300,
             alpha: { start: 1, end: 0.1 }
         });
@@ -94,8 +124,8 @@ class Platformer2 extends Phaser.Scene {
         if (this.hasGravityPower && Phaser.Input.Keyboard.JustDown(this.QKey)) {
             if (this.gravityMode === "Down") {
                 this.gravityMode = "Up";
-                this.physics.world.gravity.y = 1000;
-                this.JUMP_VELOCITY = -500;
+                this.physics.world.gravity.y = 500;
+                this.JUMP_VELOCITY = -250;
                 this.sound.play("stop", {
                     volume: 1 
                 });
@@ -106,8 +136,8 @@ class Platformer2 extends Phaser.Scene {
         if (this.hasGravityPower && Phaser.Input.Keyboard.JustDown(this.EKey)) {
             if (this.gravityMode === "Up") {
                 this.gravityMode = "Down";
-                this.physics.world.gravity.y = -1000;
-                this.JUMP_VELOCITY = 500;
+                this.physics.world.gravity.y = -500;
+                this.JUMP_VELOCITY = 250;
                 this.sound.play("start", {
                     volume: 1 
                 });
@@ -160,12 +190,8 @@ class Platformer2 extends Phaser.Scene {
             my.sprite.player.body.setVelocityY(this.JUMP_VELOCITY);
         }
 
-        if(Phaser.Input.Keyboard.JustDown(this.rKey)) {
-            this.scene.restart();
+        if(Phaser.Input.Keyboard.JustDown(this.PKey)) {
+            this.scene.start("platformerScene")
         }
-
-        this.physics.add.overlap(my.sprite.player, this.checkpointItemGroup, () => {
-            this.scene.start("titleScreen");
-        }, null, this);
     }
 }

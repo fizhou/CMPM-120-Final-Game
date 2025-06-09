@@ -32,7 +32,7 @@ let config = {
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
-    scene: [Load, Platformer, Platformer2]
+    scene: [Load, Platformer, Platformer2, Title]
 }
 
 var cursors;

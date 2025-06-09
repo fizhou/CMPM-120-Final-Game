@@ -81,7 +81,7 @@ class Platformer extends Phaser.Scene {
         });
 
         this.physics.add.overlap(my.sprite.player, this.checkpointItemGroup, () => {
-            this.scene.start("platformerScene2");
+            // this.scene.start("platformerScene2");
         }, null, this);
 
         my.sprite.player.setCollideWorldBounds(true);
@@ -128,6 +128,9 @@ class Platformer extends Phaser.Scene {
                 this.gravityMode = "Up";
                 this.physics.world.gravity.y = 1000;
                 this.JUMP_VELOCITY = -500;
+                this.sound.play("stop", {
+                    volume: 1 
+                });
                 my.sprite.player.setFlipY(false);
             }
         }
@@ -137,6 +140,9 @@ class Platformer extends Phaser.Scene {
                 this.gravityMode = "Down";
                 this.physics.world.gravity.y = -1000;
                 this.JUMP_VELOCITY = 500;
+                this.sound.play("start", {
+                    volume: 1 
+                });
                 my.sprite.player.setFlipY(true);
             }
         }
@@ -146,9 +152,9 @@ class Platformer extends Phaser.Scene {
             my.sprite.player.setFlipX(true);
             my.sprite.player.anims.play('walk', true);
 
-            //my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth/2-0, my.sprite.player.displayHeight/2-5, false);
+            my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth/2-0, my.sprite.player.displayHeight/2-5, false);
 
-            //my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
+            my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
 
             if (my.sprite.player.body.blocked.down) {
                 my.vfx.walking.start();
@@ -159,9 +165,9 @@ class Platformer extends Phaser.Scene {
             my.sprite.player.setFlipX(false);
             my.sprite.player.anims.play('walk', true);
 
-            //my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth/2-30, my.sprite.player.displayHeight/2-5, false);
+            my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth/2-30, my.sprite.player.displayHeight/2-5, false);
 
-            //my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
+            my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
 
             if (my.sprite.player.body.blocked.down) {
                 my.vfx.walking.start();
@@ -180,6 +186,9 @@ class Platformer extends Phaser.Scene {
         }
 
         if(my.sprite.player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
+            this.sound.play("boing", {
+                volume: 1 
+            });
             my.sprite.player.body.setVelocityY(this.JUMP_VELOCITY);
         }
 

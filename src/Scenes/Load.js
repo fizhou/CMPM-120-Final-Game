@@ -9,6 +9,7 @@ class Load extends Phaser.Scene {
         this.load.image("tilemap", "monochrome_tilemap_packed.png");
         this.load.tilemapTiledJSON("level-one", "level-one.tmj");
         this.load.tilemapTiledJSON("level-two", "level-two.tmj");
+        this.load.tilemapTiledJSON("lobby", "lobby.tmj");
 
         this.load.spritesheet("tilemap_sheet", "monochrome_tilemap_transparent_packed.png", {
             frameWidth: 16,
@@ -16,6 +17,13 @@ class Load extends Phaser.Scene {
         });
 
         this.load.multiatlas("kenny-particles", "kenny-particles.json");
+
+        this.load.bitmapFont("rocketSquare", "KennyRocketSquare_0.png", "KennyRocketSquare.fnt");
+        this.load.audio("blip", "glass_001.ogg");
+        this.load.audio("boing", "drop_002.ogg");
+        this.load.audio("start", "maximize_001.ogg");
+        this.load.audio("stop", "minimize_003.ogg");
+
     }
 
     create() {
@@ -42,7 +50,7 @@ class Load extends Phaser.Scene {
             frameRate: 1
         });
 
-        this.scene.start("platformerScene");
+        this.scene.start("titleScreen");
     }
 
     update() {
