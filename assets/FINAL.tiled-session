@@ -3,8 +3,9 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "lobby.tmj",
     "expandedProjectPaths": [
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -30,7 +31,8 @@
             }
         },
         "level-one.tmj#monochrome_tilemap_packed": {
-            "scaleInDock": 1.5
+            "scaleInDock": 1.5,
+            "scaleInEditor": 2
         },
         "level-two.tmj": {
             "expandedObjectLayers": [
@@ -44,18 +46,22 @@
             }
         },
         "level-two.tmj#monochrome_tilemap_packed": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 2
         },
         "lobby.tmj": {
             "expandedObjectLayers": [
-                6
+                3
             ],
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 480,
-                "y": 239.99999999999997
+                "x": 486.6666666666667,
+                "y": 301.99999999999994
             }
+        },
+        "lobby.tmj#monochrome_tilemap": {
+            "scaleInDock": 1
         },
         "lobby.tmj#monochrome_tilemap_packed": {
             "scaleInDock": 1
@@ -68,10 +74,15 @@
     "map.tileWidth": 16,
     "map.width": 60,
     "openFiles": [
+        "level-one.tmj",
+        "level-two.tmj",
+        "lobby.tmj"
     ],
     "project": "FINAL.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "level-one.tmj",
+        "level-two.tmj",
         "lobby.tmj"
     ],
     "resizeMap.removeObjects": true,

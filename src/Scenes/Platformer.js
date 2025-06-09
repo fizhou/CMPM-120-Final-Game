@@ -81,7 +81,7 @@ class Platformer extends Phaser.Scene {
         });
 
         this.physics.add.overlap(my.sprite.player, this.checkpointItemGroup, () => {
-            // this.scene.start("platformerScene2");
+            this.scene.start("platformerScene2");
         }, null, this);
 
         my.sprite.player.setCollideWorldBounds(true);
@@ -96,15 +96,6 @@ class Platformer extends Phaser.Scene {
         );
 
         this.cameras.main.startFollow(my.sprite.player);
-
-        this.levelCompleteText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'LEVEL COMPLETE!', {
-            fontSize: '48px',
-            fill: '#ffffff',
-            backgroundColor: '#000000',
-            padding: { x: 20, y: 10 },
-            align: 'center'
-        }).setOrigin(0.5).setScrollFactor(0).setVisible(false);
-
 
         cursors = this.input.keyboard.createCursorKeys();
 

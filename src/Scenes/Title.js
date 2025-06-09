@@ -28,9 +28,9 @@ class Title extends Phaser.Scene {
         my.text.title = this.add.bitmapText(centerX, 100, "rocketSquare", "Gravitator").setOrigin(0.5).setScale(1.2);
         my.text.desc1 = this.add.bitmapText(centerX, 135, "rocketSquare", "E to activate artifact").setOrigin(0.5).setScale(0.8);
         my.text.desc2 = this.add.bitmapText(centerX, 160, "rocketSquare", "Q to deactivate artifact").setOrigin(0.5).setScale(0.8);
-        my.text.desc3 = this.add.bitmapText(centerX, 185, "rocketSquare", "Press P to play").setOrigin(0.5).setScale(0.7);
-
-
+        my.text.desc2 = this.add.bitmapText(centerX, 185, "rocketSquare", "R to restart").setOrigin(0.5).setScale(0.8);
+        my.text.desc2 = this.add.bitmapText(centerX, 215, "rocketSquare", "< > ^ to move").setOrigin(0.5).setScale(0.8);
+        my.text.desc3 = this.add.bitmapText(centerX, 245, "rocketSquare", "Press P to play").setOrigin(0.5).setScale(0.7);
 
         this.physics.world.setBounds(
             0,
@@ -47,7 +47,7 @@ class Title extends Phaser.Scene {
         });
 
         my.sprite.player = this.physics.add.sprite(50 * 2, 14 * 18 * 2, "tilemap_sheet", 0).setScale(2.0);
-        
+
         this.gravityItem = this.map.createFromObjects("Object", {
             name: "gravity",
             key: "tilemap_sheet",

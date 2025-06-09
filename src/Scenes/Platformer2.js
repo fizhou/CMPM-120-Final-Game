@@ -88,6 +88,10 @@ class Platformer2 extends Phaser.Scene {
             alpha: { start: 1, end: 0.1 }
         });
         my.vfx.walking.stop();
+
+        this.physics.add.overlap(my.sprite.player, this.checkpointItemGroup, () => {
+            this.scene.start("endingScreen");
+        }, null, this);
     }
 
     update() {
@@ -163,9 +167,5 @@ class Platformer2 extends Phaser.Scene {
         if(Phaser.Input.Keyboard.JustDown(this.rKey)) {
             this.scene.restart();
         }
-
-        this.physics.add.overlap(my.sprite.player, this.checkpointItemGroup, () => {
-            this.scene.start("titleScreen");
-        }, null, this);
     }
 }
