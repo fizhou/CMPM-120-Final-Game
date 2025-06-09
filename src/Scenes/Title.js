@@ -55,10 +55,10 @@ class Title extends Phaser.Scene {
         });
 
         this.gravityItem.forEach(obj => {
-            obj.setScale(1.0);
+            obj.setScale(2.0);
             obj.setOrigin(0.5, 0.5);
-            obj.x *= 1;
-            obj.y *= 1;
+            obj.x *= 2;
+            obj.y *= 2;
         });
 
         this.gravityItemGroup = this.physics.add.staticGroup();

@@ -26,8 +26,8 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 484.6666666666667,
-                "y": 279.33333333333337
+                "x": 480.33333333333326,
+                "y": 239.66666666666663
             }
         },
         "level-one.tmj#monochrome_tilemap_packed": {
@@ -41,8 +41,8 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 505.33333333333326,
-                "y": 267.99999999999994
+                "x": 480,
+                "y": 240.33333333333331
             }
         },
         "level-two.tmj#monochrome_tilemap_packed": {
